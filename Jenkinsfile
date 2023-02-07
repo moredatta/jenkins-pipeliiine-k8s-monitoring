@@ -46,7 +46,7 @@ pipeline{
 	stage('Deploy to kubernetes cluster') {
                                      steps {
                                                echo 'continuous deployment'
-                                        withCredentials([kubeconfig: ('k8s')])
+                                      KubeConfig([credentialsId: 'K8s'])
 				     } 
 	}
 	    
