@@ -34,9 +34,9 @@ pipeline{
                 sh "docker build -t moredatta574/java ."
             }
         }
-        stage('Run Image') {
+        stage('push Image') {
             steps {
-                sh "docker run -d   --name flask_container moredatta574/java"
+                sh "docker push -d   --name java_container moredatta574/java"
             }
         }
         
