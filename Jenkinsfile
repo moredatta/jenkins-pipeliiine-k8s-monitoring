@@ -10,8 +10,8 @@ pipeline{
         stage('Login') {
 
 			steps {
-                sh echo $DOCKERHUB_CREDENTIALS_USR"
-               sh echo $DOCKERHUB_CREDENTIALS_PSW" 
+                sh "echo $DOCKERHUB_CREDENTIALS_USR"
+               sh "echo $DOCKERHUB_CREDENTIALS_PSW" 
 				sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR -p  $DOCKERHUB_CREDENTIALS_PSW" 
 			}
 		}
@@ -32,12 +32,12 @@ pipeline{
         }
         stage('Build Image') {
             steps {
-                bat "cmd docker build -t moredatta574/java ."
+                sh "docker build -t moredatta574/java ."
             }
         }
         stage('Run Image') {
             steps {
-                bat "cmd docker run -d   --name flask_container moredatta574/java"
+                sh "docker run -d   --name flask_container moredatta574/java"
             }
         }
         
