@@ -10,9 +10,9 @@ pipeline{
         stage('Login') {
 
 			steps {
-                bat "cmd /c echo $DOCKERHUB_CREDENTIALS_USR"
-               bat "cmd /c echo $DOCKERHUB_CREDENTIALS_PSW" 
-				bat "cmd echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR -p  $DOCKERHUB_CREDENTIALS_PSW" 
+                sh echo $DOCKERHUB_CREDENTIALS_USR"
+               sh echo $DOCKERHUB_CREDENTIALS_PSW" 
+				sh "cmd echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR -p  $DOCKERHUB_CREDENTIALS_PSW" 
 			}
 		}
        stage('build && SonarQube analysis') {
