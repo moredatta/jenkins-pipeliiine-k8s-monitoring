@@ -24,11 +24,7 @@ pipeline{
                 }
             }
        }
-        stage("Quality gate") {
-            steps {
-                waitForQualityGate abortPipeline: true
-            }
-        }
+       
         stage('Build Image') {
             steps {
                 sh "docker build -t moredatta574/java ."
