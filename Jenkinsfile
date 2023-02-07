@@ -32,7 +32,7 @@ pipeline{
         }
         stage('push Image') {
             steps {
-                sh "docker push -d   --name java_container moredatta574/java"
+                sh "docker push --name java_container moredatta574/java"
             }
         }
         
