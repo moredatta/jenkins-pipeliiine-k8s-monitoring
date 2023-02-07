@@ -47,6 +47,8 @@ pipeline{
                                      steps {
                                                echo 'continuous deployment'
                                        withKubeConfig([credentialsId: 'config(2)(k8s)'])
+				     }
+	}
 	    
        
     }
