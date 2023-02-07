@@ -45,7 +45,9 @@ pipeline{
 	    
 	 stage('Apply Kubernetes Files') {
 	     steps {
-          	 sh 'kubectl apply -f demo.yml'
+          	 withKubeConfig([credentialsId: 'k8s']) {
+          sh 'cat demo.yml | sed "s/{{BUILD_NUMBER}}/$BUILD_NUMBER/g" | kubectl apply -f -'
+		 }
           
                
               }
