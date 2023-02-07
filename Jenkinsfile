@@ -15,7 +15,6 @@ pipeline{
 				bat "cmd echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR -p  $DOCKERHUB_CREDENTIALS_PSW" 
 			}
 		}
-    stages{
        stage('build && SonarQube analysis') {
             steps {
                 withSonarQubeEnv('sonarQube-8.9.20') {
