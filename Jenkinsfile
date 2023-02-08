@@ -50,9 +50,10 @@ pipeline{
                                      steps {
                                                echo 'continuous deployment'
                                        step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION,  credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
-		   echo "Deployment Finished ..."
-       
-     
+		   echo "Deployment Finished ...
+					     {
+					     
+					   
          //sh 'kubectl get pods'
          sh 'pwd'
          sh 'ls'
@@ -63,7 +64,7 @@ pipeline{
          sh 'kubectl get pods'
                                        }
                                      }
-              
+	 }
 	    
        
     }
