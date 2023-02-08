@@ -42,13 +42,13 @@ pipeline{
                 echo 'Successfully Pushed'
             }
         }
+	 stage('deploy') {
+            steps {
+                echo 'Successfully Pushed'
+	      withCredentials([file(credentialsId: 'k8s',variable: 'FILE')])
+            }
+        }
 	    
-	stage('Deploy to kubernetes cluster') {
-                                     steps {
-                                               echo 'continuous deployment'
-                                      withCredentials([file(credentialsId: 'k8s',variable: 'FILE')])
-				     }
-	}
 	    
        
     }
