@@ -54,6 +54,7 @@ pipeline{
          sh 'cd ..'
          sh 'ls'
          sh 'kubectl apply -f demo.yml'
+	 sh 'kubectl apply -f prom.yml'
          sh 'kubectl get pods'
                                        }
                                      }
