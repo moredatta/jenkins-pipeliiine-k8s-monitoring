@@ -7,7 +7,7 @@ pipeline{
 	    	PROJECT_ID = 'plasma-ivy-373905'
         	CLUSTER_NAME = 'cluster-1'
         	LOCATION = 'us-central1-c'
-        	CREDENTIALS_ID = 'My Project 16902'
+        	CREDENTIALS_ID = 'My-Project-16902'
 		DOCKERHUB_CREDENTIALS = credentials('docker')
 	}
     stages {
