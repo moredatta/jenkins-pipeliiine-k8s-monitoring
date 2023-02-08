@@ -79,6 +79,8 @@ spec:
     app: prometheus
     tier: backend
   type: LoadBalancer
+   externalIPs:
+  - 34.131.225.121
 
 ---
 apiVersion: v1
