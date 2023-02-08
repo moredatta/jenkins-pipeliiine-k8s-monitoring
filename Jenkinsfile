@@ -51,7 +51,7 @@ pipeline{
                                                echo 'continuous deployment'
                                        step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'petclinic.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
 		   echo "Deployment Finished ..."
-       {
+       
      
          //sh 'kubectl get pods'
          sh 'pwd'
@@ -63,7 +63,7 @@ pipeline{
          sh 'kubectl get pods'
                                        }
                                      }
-              }
+              
 	    
        
     }
