@@ -4,6 +4,10 @@ pipeline{
     maven 'M3'
   }
     environment {
+	    	 PROJECT_ID = 'plasma-ivy-373905 '
+        	CLUSTER_NAME = 'cluster-1 '
+        	LOCATION = 'us-central1-c 	'
+        	CREDENTIALS_ID = 'My Project 16902'
 		DOCKERHUB_CREDENTIALS = credentials('docker')
 	}
     stages {
@@ -27,12 +31,12 @@ pipeline{
        
         stage('Build Image') {
             steps {
-                sh "docker build -t moredatta574/java ."
+                sh "docker build -t moredatta574/jenkins ."
             }
         }
         stage('push Image') {
             steps {
-                sh "docker push  moredatta574/java"
+                sh "docker push  moredatta574/jenkins"
             }
         }
 	    
@@ -45,7 +49,8 @@ pipeline{
 	 stage('Deploy to kubernetes cluster') {
                                      steps {
                                                echo 'continuous deployment'
-                                       withKubeConfig([credentialsId: 'k8s'])
+                                       step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'petclinic.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+		   echo "Deployment Finished ..."
        {
      
          //sh 'kubectl get pods'
