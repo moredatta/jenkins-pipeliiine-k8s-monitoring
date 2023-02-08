@@ -80,7 +80,7 @@ spec:
     tier: backend
   type: LoadBalancer
   externalIPs:
-  - 34.131.225.121
+  - 35.244.17.198
 
 ---
 apiVersion: v1
