@@ -45,7 +45,7 @@ pipeline{
 	 stage('deploy') {
             steps {
                 echo 'Successfully Pushed'
-	      withCredentials([file(credentialsId: 'k8s',variable: 'FILE')])
+	      withKubeConfig([file(credentialsId: 'k8s',variable: 'FILE')])
             }
         }
 	    
