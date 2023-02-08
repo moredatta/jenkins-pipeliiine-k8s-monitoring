@@ -13,6 +13,6 @@ spec:
     spec:
       containers:
       - name: demo
-        image: moredatta574/java:latest
+        image: moredatta574/jenkins:latest
         ports:
         - containerPort: 8090
