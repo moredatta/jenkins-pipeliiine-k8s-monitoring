@@ -42,13 +42,22 @@ pipeline{
                 echo 'Successfully Pushed'
             }
         }
-	 stage('deploy') {
-            steps {
-                echo 'Successfully Pushed'
-	       withKubeConfig([credentialsId: 'k8s'])
-            }
-        }
-	    
+	 stage('Deploy to kubernetes cluster') {
+                                     steps {
+                                               echo 'continuous deployment'
+                                       withKubeConfig([credentialsId: 'k8s'])
+       {
+     
+         //sh 'kubectl get pods'
+         sh 'pwd'
+         sh 'ls'
+         sh 'cd ..'
+         sh 'ls'
+         sh 'kubectl apply -f demo.yml'
+         sh 'kubectl get pods'
+                                       }
+                                     }
+              }
 	    
        
     }
