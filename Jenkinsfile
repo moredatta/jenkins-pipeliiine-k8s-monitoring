@@ -49,7 +49,7 @@ pipeline{
 	 stage('Deploy to kubernetes cluster') {
                                      steps {
                                                echo 'continuous deployment'
-                                       step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'demo.yml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+                                       step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION,  credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
 		   echo "Deployment Finished ..."
        
      
