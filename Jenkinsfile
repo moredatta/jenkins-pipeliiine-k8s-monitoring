@@ -53,8 +53,8 @@ pipeline{
         }   
 	  stage('Deploy to GKE') {
             steps{
-                 sh "sed -i 's/hello:latest/hello:${env.BUILD_ID}/g' test.yml"
-                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'test.yml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+                 sh "sed -i 's/hello:latest/hello:${env.BUILD_ID}/g' grafana-dep.yml"
+                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'grafana-dep.yml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
             }
         }
 	 
