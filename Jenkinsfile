@@ -46,6 +46,11 @@ pipeline{
                 echo 'Successfully Pushed'
             }
         }
+	 stage('pull Image') {
+            steps {
+                sh "docker pull prom/prometheus"
+            }
+        }   
 	  stage('Deploy to GKE') {
             steps{
                 sh "sed -i 's/hello:latest/hello:${env.BUILD_ID}/g' prom.yml"
