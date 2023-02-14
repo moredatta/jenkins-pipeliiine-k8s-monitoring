@@ -28,6 +28,7 @@ pipeline{
         bat "cmd /c mvn sonar:sonar"
     }
         }
+	
       
        
         stage('Build Image') {
@@ -54,6 +55,6 @@ pipeline{
         }   
 	  
 	    
-       
+	}
     }
 }
