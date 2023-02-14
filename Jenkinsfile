@@ -4,10 +4,6 @@ pipeline{
     maven 'M3'
   }
     environment {
-	    	PROJECT_ID = 'plasma-ivy-373905'
-        	CLUSTER_NAME = 'cluster-1'
-        	LOCATION = 'us-central1-c'
-        	CREDENTIALS_ID = 'My-Project-16902'
 		DOCKERHUB_CREDENTIALS = credentials('docker')
 	}
     stages {
@@ -20,7 +16,7 @@ pipeline{
 		}
        stage('build && SonarQube analysis') {
             steps {
-                withSonarQubeEnv('sonarQube-8.9.20') {
+                withSonarQubeEnv('sonarqube-9.8') {
                     // Optionally use a Maven environment you've configured already
                    
                         sh 'mvn clean package sonar:sonar'
@@ -31,12 +27,12 @@ pipeline{
        
         stage('Build Image') {
             steps {
-                sh "docker build -t moredatta574/jenkins ."
+                sh "docker build -t moredatta574/jenkins-demo ."
             }
         }
         stage('push Image') {
             steps {
-                sh "docker push  moredatta574/jenkins"
+                sh "docker push  moredatta574/jenkins-demo"
             }
         }
 	    
@@ -51,13 +47,7 @@ pipeline{
                 sh "docker pull prom/prometheus"
             }
         }   
-	  stage('Deploy to GKE') {
-            steps{
-                 sh "sed -i 's/hello:latest/hello:${env.BUILD_ID}/g' grafana-dep.yml"
-                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'grafana-dep.yml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
-            }
-        }
-	 
+	  
 	    
        
     }
