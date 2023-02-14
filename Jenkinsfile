@@ -9,9 +9,9 @@ pipeline{
     stages {
          stage('Login') {
 		    steps {
-               cmd '/c echo $DOCKERHUB_CREDENTIALS_USR'
-               cmd '/c echo $DOCKERHUB_CREDENTIALS_PSW'
-		        bat 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW'
+               bat 'cmd /c echo $DOCKERHUB_CREDENTIALS_USR'
+               bat 'cmd /c echo $DOCKERHUB_CREDENTIALS_PSW'
+		        bat "cmd /cecho $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW'
 			}
 		}
        stage('build && SonarQube analysis') {
@@ -19,7 +19,7 @@ pipeline{
                 withSonarQubeEnv('sonarqube-9.8') {
                     // Optionally use a Maven environment you've configured already
                    
-                        sh 'mvn clean package sonar:sonar'
+                        bat 'cmd /c mvn clean package sonar:sonar'
                    
                 }
             }
@@ -27,12 +27,12 @@ pipeline{
        
         stage('Build Image') {
             steps {
-                sh "docker build -t moredatta574/jenkins-demo ."
+               bat "cmd /c docker build -t moredatta574/jenkins-demo ."
             }
         }
         stage('push Image') {
             steps {
-                sh "docker push  moredatta574/jenkins-demo"
+           bat "cmd /c docker push  moredatta574/jenkins-demo"
             }
         }
 	    
@@ -44,7 +44,7 @@ pipeline{
         }
 	 stage('pull Image') {
             steps {
-                sh "docker pull prom/prometheus"
+              bat "cmd /c docker pull prom/prometheus"
             }
         }   
 	  
