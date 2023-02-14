@@ -9,8 +9,8 @@ pipeline{
     stages {
          stage('Login') {
 		    steps {
-               cmd /c 'echo $DOCKERHUB_CREDENTIALS_USR'
-               cmd /c 'echo $DOCKERHUB_CREDENTIALS_PSW'
+               cmd '/c echo $DOCKERHUB_CREDENTIALS_USR'
+               cmd '/c echo $DOCKERHUB_CREDENTIALS_PSW'
 		        bat 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW'
 			}
 		}
