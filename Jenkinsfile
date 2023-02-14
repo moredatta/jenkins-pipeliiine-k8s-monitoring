@@ -14,16 +14,7 @@ pipeline{
 		        bat "cmd /cecho $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW"
 			}
 		}
-       stage('build && SonarQube analysis') {
-            steps {
-                withSonarQubeEnv('sonarqube-9.8') {
-                    // Optionally use a Maven environment you've configured already
-                   
-                        bat 'cmd /c mvn clean package sonar:sonar'
-                   
-                }
-            }
-       }
+      
        
         stage('Build Image') {
             steps {
