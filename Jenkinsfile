@@ -58,7 +58,9 @@ pipeline{
 	 stage("Kubernetes Create Deployment"){
       steps{
         script {
-           kubernetesDeploy(configs: "demo.yml", kubeconfigId: "config")
+           withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'kubernetes', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
+  	    bat "cmd /c kubectl apply -f demo.yml"
+}
         }
       }
     }    
