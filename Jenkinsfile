@@ -14,22 +14,7 @@ pipeline{
 		       sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW"
 			}
 		}
-	stage('Build'){
-            steps{
-               bsh  "mvn clean package"
-            }
-         }
-        stage('SonarQube analysis') {
-//    def scannerHome = tool 'SonarScanner 4.0';
-        steps{
-        withSonarQubeEnv('SonarQube-8.9.9') { 
-        // If you have configured more than one global server connection, you can specify its name
-//      sh "${scannerHome}/bin/sonar-scanner"
-       sh "mvn sonar:sonar"
-    }
-        }
-        }
-       
+	
       
        
         stage('Build Image') {
