@@ -9,23 +9,23 @@ pipeline{
     stages {
          stage('Login') {
 		    steps {
-               bat "cmd /c echo $DOCKERHUB_CREDENTIALS_USR"
-               bat "cmd /c echo $DOCKERHUB_CREDENTIALS_PSW"
-		        bat "cmd /cecho $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW"
+               sh "echo $DOCKERHUB_CREDENTIALS_USR"
+              sh "echo $DOCKERHUB_CREDENTIALS_PSW"
+		       sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW"
 			}
 		}
 	stage('Build'){
             steps{
-               bat "cmd /c mvn clean package"
+               bsh  "mvn clean package"
             }
          }
         stage('SonarQube analysis') {
 //    def scannerHome = tool 'SonarScanner 4.0';
         steps{
-        withSonarQubeEnv('sonarqube-9.8') { 
+        withSonarQubeEnv('SonarQube-8.9.9') { 
         // If you have configured more than one global server connection, you can specify its name
 //      sh "${scannerHome}/bin/sonar-scanner"
-        bat "cmd /c mvn sonar:sonar"
+       sh "mvn sonar:sonar"
     }
         }
         }
@@ -34,12 +34,12 @@ pipeline{
        
         stage('Build Image') {
             steps {
-               bat "cmd /c docker build -t moredatta574/jenkins-demo ."
+               sh "docker build -t moredatta574/jenkins-demo ."
             }
         }
         stage('push Image') {
             steps {
-           bat "cmd /c docker push  moredatta574/jenkins-demo"
+           sh "docker push  moredatta574/jenkins-demo"
             }
         }
 	    
@@ -51,7 +51,7 @@ pipeline{
         }
 	 stage('pull Image') {
             steps {
-              bat "cmd /c docker pull prom/prometheus"
+             sh "docker pull prom/prometheus"
             }
         }   
 	  
@@ -59,7 +59,7 @@ pipeline{
       steps{
         script {
            withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'kubernetes', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
-  	    bat "cmd /c kubectl apply -f demo.yml"
+  	    sh  "kubectl apply -f demo.yml"
 }
         }
       }
