@@ -46,7 +46,16 @@ pipeline {
 		       sh "docker tag  moredatta574/jenkins-demo gcr.io/capable-sphinx-378108/moredatta574/jenkins-demo"
 		    }
 		 }
-	    
+	    stage('push'){
+		    steps{
+		       sh "docker push gcr.io/capable-sphinx-378108/moredatta574/jenkins-demo"
+		    }
+		 }
+	     stage('list'){
+		    steps{
+		       sh "gcloud container images list --repository=gcr.io/capable-sphinx-378108"
+		    }
+		 }
 
 
 	    stage('Install service') {
