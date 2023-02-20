@@ -48,12 +48,12 @@ pipeline {
 		 }
 	    stage('push'){
 		    steps{
-		       sh "docker push gcr.io/capable-sphinx-378108/moredatta574/jenkins-demo"
+		       sh "sudo docker push gcr.io/capable-sphinx-378108/moredatta574/jenkins-demo"
 		    }
 		 }
 	     stage('list'){
 		    steps{
-		       sh "gcloud container images list --repository=gcr.io/capable-sphinx-378108"
+		       sh "sudo gcloud container images list --repository=gcr.io/capable-sphinx-378108"
 		    }
 		 }
 
