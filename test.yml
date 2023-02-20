@@ -13,6 +13,6 @@ spec:
     spec:
       containers:
       - name: test
-        image: nginx:1.14.2
+        image: moredatta574/jenkins-demo 
         ports:
         - containerPort: 80
