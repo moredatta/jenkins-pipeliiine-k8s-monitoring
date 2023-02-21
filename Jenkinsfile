@@ -46,6 +46,11 @@ pipeline {
     }
         }
         }
+	  stage("Quality gate") {
+            steps {
+                waitForQualityGate abortPipeline: true
+            }
+        }
 	    stage('pull'){
 		    steps{
 		       sh "docker pull  moredatta574/jenkins-demo"
