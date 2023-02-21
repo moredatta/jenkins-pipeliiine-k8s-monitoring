@@ -57,14 +57,14 @@ pipeline {
 	    stage('Install service') {
 	      steps {
 		sh '''
-		  gcloud run services replace service.yaml --platform='managed' --region='asia-south1-c'
+		  gcloud run services replace service.yaml --platform='managed' --region='asia-south1'
 		'''
 	      }
 	    }
 	    stage('Allow allUsers') {
 	      steps {
 		sh '''
-		  gcloud run services add-iam-policy-binding hello --region='asia-south1-c' --member='allUsers' --role='roles/run.invoker'
+		  gcloud run services add-iam-policy-binding hello --region='asia-south1' --member='allUsers' --role='roles/run.invoker'
 		'''
 	      }
 	    }
